@@ -1,0 +1,20 @@
+135 Safari Ali
+2 7 4 14 MathAnEx 0
+139 Yarosh Andrey
+2 5 6 13 GeomAlgZ 11
+137 Golovina Natasha
+2 6 7 15 History -1
+132 Zapol Nikita
+2 8 5 13 ProgaEx 9
+135 Safari Ali
+2 7 4 14 ProgaZ -1
+134 Lagun Roman
+2 8 3 15 EconomicsEx 10
+132 Zapol Nikita
+2 8 5 13 MathAnEx 10
+134 Lagun Roman
+2 8 3 15 DiscreetMathEx 9
+136 Krolikov Eugen
+2 8 6 12 MathAnEx 0
+131 Frolova Elena
+2 4 7 15 History 8

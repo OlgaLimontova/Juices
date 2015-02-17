@@ -1,0 +1,9 @@
+8
+tree
+tree
+apple
+apricot
+trim
+apple
+plum
+start
