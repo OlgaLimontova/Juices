@@ -1,9 +1,0 @@
-.EXE
-.wav
-.ex
-.cp
-.txt
-.pc
-.a
-.doc
-.docx

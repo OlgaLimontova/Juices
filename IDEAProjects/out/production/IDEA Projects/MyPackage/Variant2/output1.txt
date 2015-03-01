@@ -1,9 +1,0 @@
-25
-tree
-tree
-trim
-apple
-apple
-apricot
-plum
-start

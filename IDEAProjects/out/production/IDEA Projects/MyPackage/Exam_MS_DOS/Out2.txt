@@ -1,9 +1,0 @@
-alex.doc
-buf.a
-Data.wav
-MYNOTE.cp
-OUT.EXE
-ReadMe.txt
-Stream.ex
-third.docx
-Turbo.pc
