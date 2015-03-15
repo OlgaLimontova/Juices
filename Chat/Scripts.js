@@ -15,7 +15,9 @@ function run() {
     var showButton = document.getElementById('show');
     showButton.addEventListener('click', showHistory);
     var getNick = document.getElementById('getnick');
-    getNick.value = getName();
+    var nickname = localStorage.getItem('name');
+    name = nickname.toString().substring(1, nickname.toString().length - 1);
+    getNick.value = name;
     var history = document.getElementById('history');
     var item = localStorage.getItem('list');
     history.value = item;
