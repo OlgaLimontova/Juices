@@ -25,7 +25,7 @@ function setName() {
     var nickname = document.getElementById('getnick');
     name = nickname.value;
     var action = "New name: " + name;
-//    localStorage.setItem('name', JSON.stringify(name, " ", 4));
+    localStorage.setItem('name', JSON.stringify(name, " ", 4));
     actionList.push(action);
     localStorage.setItem('list', JSON.stringify(actionList, " ", 4));
 };
