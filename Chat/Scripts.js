@@ -130,7 +130,7 @@ function deleteMessage() {
     del = document.getElementById('delete');
     if (his.value != "")
         his.value = oldHistory;
-    action = "Message" + " " + mes + " was deleted";
+    action = "Message" + " " + enterMes + " was deleted";
     actionList.push(action);
     localStorage.setItem('list', JSON.stringify(actionList, " ", 4));
 };
