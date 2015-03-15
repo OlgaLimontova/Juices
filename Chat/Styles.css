@@ -47,5 +47,6 @@ button {
 textarea {
     overflow-y: scroll;
     outline: none;
+    width: 75%;  
     border: 1px solid #000000;
 }
