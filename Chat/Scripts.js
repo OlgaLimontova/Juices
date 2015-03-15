@@ -25,6 +25,7 @@ function setName() {
     var nickname = document.getElementById('getnick');
     name = nickname.value;
     var action = "New name: " + name;
+//    localStorage.setItem('name', JSON.stringify(name, " ", 4));
     actionList.push(action);
     localStorage.setItem('list', JSON.stringify(actionList, " ", 4));
 };
@@ -33,18 +34,51 @@ function getName() {
     return name;
 };
 
+function storeName(name) {
+    if (typeof(Storage) == "undefined") {
+        alert("Error! LocalStorage is not accessible!");
+        return;
+    }
+    localStorage.setItem('name', JSON.stringify(name, " ", 4));
+}
+
+function restoreName() {
+    if (typeof(Storage) == "undefined") {
+        alert("Error! LocalStorage is not accessible!");
+        return;
+    }
+    var name = localStorage.getItem('name');
+    return name && JSON.parse(name);
+};
+
+function storeMessage(message) {
+    if (typeof(Storage) == "undefined") {
+        alert("Error! LocalStorage is not accessible!");
+        return;
+    }
+    localStorage.setItem('message', JSON.stringify(message, " ", 4));
+}
+
 function restoreMessage() {
-    if (typeof (Storage) == "undefined") {
-        alert("Error!");
+    if (typeof(Storage) == "undefined") {
+        alert("Error! LocalStorage is not accessible!");
         return;
     }
     var message = localStorage.getItem('message');
     return message && JSON.parse(message);
 };
 
+function storeAction(action) {
+    if (typeof(Storage) == "undefined") {
+        alert("Error! LocalStorage is not accessible!");
+        return;
+    }
+    localStorage.setItem('list', JSON.stringify(action, " ", 4));
+}
+
 function restoreAction() {
-    if (typeof (Storage) == "undefined") {
-        alert("Error!");
+    if (typeof(Storage) == "undefined") {
+        alert("Error! LocalStorage is not accessible!");
         return;
     }
     var action = localStorage.getItem('list');
@@ -72,6 +106,10 @@ function enterMessage() {
         localStorage.setItem('list', JSON.stringify(actionList, " ", 4));
     }
 };
+
+function getOldName() {
+    return oldName;
+}
 
 function showHistory() {
     var show = document.getElementById('show');
