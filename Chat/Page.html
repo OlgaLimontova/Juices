@@ -3,20 +3,29 @@
 <html>
 <head>
     <title>Chatroom</title>
-    <link rel ="stylesheet" href ="Styles.css">
-    <script src="Scripts.js"></script>
+    <link type="text/css" rel="stylesheet" href="Styles.css">
+    <script type="text/javascript" src="Scripts.js"></script>
 </head>
 
 <body onload="run();">
     <h3>Online</h3>
     <h1>CHATROOM</h1>
-    <div><p><input id="getnick" type="text" name="nickname" size="25" placeholder="User Name">
-        <button id="connect" class="b2">Connect</button></p></div>
-    <div><textarea id="history" name="textarea" cols="90" rows="28" placeholder="History" readonly="readonly"></textarea>
-    <button id="delete" class="b1">Delete</button>
-        <button id="edit" class="b1">Edit</button>
-        <button id="show" class="b1">Show history</button></div>
-    <div><textarea id="mesarea" name="Message" cols="90" rows="5" placeholder="Enter your message."></textarea>
-        <button id="enter" class="b1">Enter</button></div>
+    <div>
+        <p>
+            <input id="getnick" type="text" name="nickname" size="25" placeholder="User Name">
+            <button id="connect" class="b2" onclick="setName();">Connect</button>
+        </p>
+    </div>
+    <div>
+        <textarea id="history" name="textarea" rows="28" placeholder="History" readonly="readonly"></textarea>
+        <input id="getnumber" type="text" class="i1" name="number" size="15" placeholder="Number">
+        <button id="delete" class="b1" onclick="deleteMessage();">Delete</button>
+        <button id="edit" class="b1" onclick="editMessageFirst();">Edit</button>
+    </div>
+    <div>
+        <textarea id="mesarea" name="Message" rows="5" placeholder="Enter your message."></textarea>
+        <button id="enter" class="b1" onclick="enterMessage();">Enter</button>
+        <button id="clean" class="b1" onclick="clean();">Clean</button>
+    </div>
 </body>
 </html>
