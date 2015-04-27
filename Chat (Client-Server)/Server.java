@@ -56,13 +56,13 @@ public class Server implements HttpHandler {
             response = "Unsupported http method: " + httpExchange.getRequestMethod();
         sendResponse(httpExchange, response);
     }
-
+    
     private String doGet(HttpExchange httpExchange) {
         String query = httpExchange.getRequestURI().getQuery();
         if (query != null) {
             Map<String, String> map = queryToMap(query);
             String token = map.get("token");
-            if (token != null && !"".equals(token)) {
+            if (!"".equals(token) && token != null) {
                 int index = messageExchange.getIndex(token);
                 return messageExchange.getServerResponse(history.subList(index, history.size()));
             } else
@@ -80,30 +80,19 @@ public class Server implements HttpHandler {
             System.err.println("Invalid user message: " + httpExchange.getRequestBody() + " " + e.getMessage());
         }
     }
-    
+
     private void doDelete(HttpExchange httpExchange) {
-        String query = httpExchange.getRequestURI().getQuery();
-        if (query != null) {
-            Map<String, String> map = queryToMap(query);
-            String token = map.get("token");
-            int index = -1;
-            if (token != null && !"".equals(token))
-                index = messageExchange.getIndex(token);
-            if (index != -1) {
-                Message message = history.get(index);
-                String messageToDelete = message.getText();
-                message.deleteMessage();
-                System.out.println("Delete message: " + message.getNameUser() + ": " + messageToDelete);
-            }
-        }
+        Message message = history.get(history.size() - 1);
+        System.out.println("Delete message: " + message.getNameUser() + " : " + message.getText());
+        history.remove(history.size() - 1);
     }
     
     private void doPut(HttpExchange httpExchange) {
         try {
             Message changedMessage = messageExchange.getClientMessage(httpExchange.getRequestBody());
-            int idOfChangedMessage =  changedMessage.getID();
-            if (idOfChangedMessage >= 0 && idOfChangedMessage < history.size()) {
-                Message message = history.get(idOfChangedMessage);
+            int changedMessageID = changedMessage.getID();
+            if (changedMessageID >= 0 && changedMessageID < history.size()) {
+                Message message = history.get(changedMessageID);
                 message.setText(changedMessage.getText());
                 message.setChange(true);
             }
@@ -111,12 +100,14 @@ public class Server implements HttpHandler {
             System.err.println("Invalid user message: " + httpExchange.getRequestBody() + " " + e.getMessage());
         }
     }
-    
+
     private void sendResponse(HttpExchange httpExchange, String response) {
         try {
             byte[] bytes = response.getBytes();
             Headers headers = httpExchange.getResponseHeaders();
             headers.add("Access-Control-Allow-Origin", "*");
+            if ("OPTIONS".equals(httpExchange.getRequestMethod())) {
+                headers.add("Access-Control-Allow-Methods", "PUT, DELETE, POST, GET, OPTIONS");
             httpExchange.sendResponseHeaders(200, bytes.length);
             OutputStream os = httpExchange.getResponseBody();
             os.write(bytes);
@@ -126,15 +117,15 @@ public class Server implements HttpHandler {
             e.printStackTrace();
         }
     }
-
+        
     private Map<String, String> queryToMap(String query) {
         Map<String, String> result = new HashMap<String, String>();
-        for (String param: query.split("&")) {
-            String pair[] = param.split("=");
-            if (pair.length > 1)
-                result.put(pair[0], pair[1]);
-            else
+        for (String element: query.split("&")) {
+            String pair[] = element.split("=");
+            if (pair.length <= 1)
                 result.put(pair[0], "");
+            else
+                result.put(pair[0], pair[1]);
         }
         return result;
     }
