@@ -7,13 +7,6 @@ h1 {
     font-weight: 700;
 }
 
-h3 {
-    color: #000000;
-    font-size: medium;
-    top: 30px;
-    left: 200px;
-}
-
 .b1 {
     position: relative;
     top: -7px;
@@ -30,7 +23,7 @@ h3 {
 .b3 {
     position: relative;
     height: 22px;
-    top: -10px;
+    top: 4px;
 }
 
 body {
