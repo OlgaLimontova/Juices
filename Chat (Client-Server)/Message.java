@@ -14,7 +14,7 @@ public class Message implements JSONAware {
         text = "";
         id = currId++;
     }
-    
+
     public Message(String text, String userName) {
         this.userName = userName;
         this.text = text;
@@ -24,7 +24,7 @@ public class Message implements JSONAware {
     public int getID() {
         return id;
     }
-    
+
     public void setID(int id) {
         this.id = id;
     }
@@ -32,7 +32,7 @@ public class Message implements JSONAware {
     public boolean isDeleted() {
         return deleted;
     }
-    
+
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
@@ -40,7 +40,7 @@ public class Message implements JSONAware {
     public boolean isChanged() {
         return changed;
     }
-    
+
     public void setChanged(boolean changed) {
         this.changed = changed;
     }
@@ -48,18 +48,18 @@ public class Message implements JSONAware {
     public String getText() {
         return text;
     }
-    
+
     public void setText(String text) {
         this.text = text;
     }
-    
-    public String getNameUser() {
+
+    public String getUserName() {
         return userName;
     }
 
     public void deleteMessage() {
         if (!deleted) {
-            this.text = "message has isDeleted.";
+            this.text = "message is deleted.";
             this.setDeleted(true);
         }
     }
@@ -89,6 +89,6 @@ public class Message implements JSONAware {
 
     @Override
     public boolean equals(Object obj) {
-        return (((DataMessage)obj).getID() == id);
+        return (((Message)obj).getID() == id);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MessageExchange {
     private JSONParser jsonParser = new JSONParser();
-    
+
     public String getToken(int index) {
         Integer number = index * 8 + 11;
         return "TN" + number + "EN";

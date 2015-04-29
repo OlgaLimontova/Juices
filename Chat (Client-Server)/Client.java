@@ -8,15 +8,15 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Client implements Runnable {
     private List<Message> history = new ArrayList<Message>();
     private MessageExchange messageExchange = new MessageExchange();
     private String host;
     private Integer port;
-    private String userName = "User" + (new Random()).nextInt(90);
+    private String userName = "User" + (new Random()).nextInt(100);
 
     public Client(String host, Integer port) {
         this.host = host;
@@ -52,7 +52,7 @@ public class Client implements Runnable {
             JSONObject jsonObject = messageExchange.getJSONObject(response);
             JSONArray jsonArray = (JSONArray)jsonObject.get("messages");
             for (Object o: jsonArray) {
-                Message data = DataMessage.parseDataMessage((JSONObject)o);
+                Message data = Message.parseMessage((JSONObject)o);
                 System.out.println(data.toString());
                 list.add(data);
             }
@@ -104,7 +104,7 @@ public class Client implements Runnable {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            Message message = new Message(scanner.nextLine(), userName);
+            Message message = new Message(scanner.nextLine(),userName);
             sendMessage(message);
         }
     }
