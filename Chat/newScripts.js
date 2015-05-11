@@ -68,7 +68,7 @@ function updateMessage() {
             his = document.getElementById('history');
             var str = "";
             for (var i = 0; i < answer.messages.length; i++)
-                str += answer.messages[i].user + ": " + answer.messages[i].message + "\n";
+                str += "[" + answer.messages[i].id + "] " + answer.messages[i].user + ": " + answer.messages[i].message + "\n";
             his.value = str;
         });
 };
@@ -100,12 +100,12 @@ function enterMessage() {
     var postData = new Object();
     if (mes.value != "") {
         postData.message = mes.value;
+        postData.user = name;
         postData.id = Math.floor(Math.random() * 100000 + Math.random());
-        messageList.push("[" + postData.id + "]   " + name + ": " + postData.message);
+        messageList.push("[" + postData.id + "]   " + postData.user + ": " + postData.message);
         reloadHistory();
         mes.value = "";
         storeMessage(messageList);
-        postData.user = name;
         post(appState.mainUrl, JSON.stringify(postData),
         function() {
             updateMessage();
@@ -120,7 +120,6 @@ function reloadHistory() {
         history.value += messageList[i] + "\n";
 };
 
-/*
 function deleteMessage() {
     if (document.getElementById("getnumber").value != "") {
         var number = document.getElementById("getnumber").value;
@@ -139,9 +138,6 @@ function deleteMessage() {
             messageList[i] = messageList[i + 1];
         messageList.length--;
         alert("Message " + toDelete + " was deleted.");
-        action = "Message " + toDelete + " was deleted";
-        actionList.push(action);
-        localStorage.setItem('list', JSON.stringify(actionList));
         document.getElementById('getnumber').value = "";
         reloadHistory();
     }
@@ -150,11 +146,9 @@ function deleteMessage() {
         return;
     }
 };
-*/
 
-
-function deleteMessage() {
-    deleteFunction(appState.mainUrl,
+function deleteMessageAjax() {
+    deleteF(appState.mainUrl,
     function() {
         updateMessage();
     });
@@ -191,23 +185,27 @@ function editMessageSecond() {
     reloadHistory();
 };
 
-function get(url, continueWith) {
-    ajax('GET', url, null, continueWith);
+function get(url, continueWith, continueWithError) {
+    ajax('GET', url, null, continueWith, continueWithError);
 };
 
-function post(url, data, continueWith) {
-    ajax('POST', url, data, continueWith);
+function post(url, data, continueWith, continueWithError) {
+    ajax('POST', url, data, continueWith, continueWithError);
 };
 
-function deleteF(url, continueWith) {
-    ajax('DELETE', url, null, continueWith);
+function put(url, data, continueWith, continueWithError) {
+    ajax('PUT', url, data, continueWith, continueWithError);
+};
+
+function deleteF(url, continueWith, continueWithError) {
+    ajax('DELETE', url, null, continueWith, continueWithError);
 };
 
 
-function ajax(method, url, data, continueWith) {
+function ajax(method, url, data, continueWith, continueWithError) {
     statusButton = document.getElementById('status');
     var xmlhttp = getXmlHttp();
-    xmlhttp.open(method, url, true);
+    xmlhttp.open(method || 'GET', url, true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4) {
             if (xmlhttp.status == 200) {
