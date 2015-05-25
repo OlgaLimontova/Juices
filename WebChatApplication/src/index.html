@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Chatroom</title>
+    <link type="text/css" rel="stylesheet" href="Styles.css">
+    <script type="text/javascript" src="newScripts.js"></script>
+</head>
+
+<body onload="run();">
+    <button id="status" class="b3" style="display:block">Online</button>
+    <h1>CHATROOM</h1>
+    <div>
+        <p>
+            <input id="getnick" type="text" name="nickname" size="25" placeholder="User Name">
+            <button id="connect" class="b2" onclick="setName();">Connect</button>
+        </p>
+    </div>
+    <div>
+        <textarea id="history" name="textarea" rows="28" placeholder="History" readonly="readonly"></textarea>
+        <input id="getnumber" class="i1" type="text" name="number" size="15" placeholder="Number">
+        <button id="delete" class="b1" onclick="deleteMessage();">Delete</button>
+        <button id="edit" class="b1" onclick="editMessageFirst();">Edit</button>
+    </div>
+    <div>
+        <textarea id="mesarea" name="Message" rows="5" placeholder="Enter your message."></textarea>
+        <button id="enter" class="b1" onclick="enterMessage();">Enter</button>
+        <button id="clean" class="b1" onclick="clean();">Clean</button>
+    </div>
+</body>
+</html>
